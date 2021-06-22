@@ -21,11 +21,24 @@ namespace ScreenShowElements
 
 		internal PictureBox MyWebcam;
 
+		internal double Zoom { get; private set; }
+
 		internal void AttachWebcam(PictureBox pictureBox)
 		{
 			MyWebcam = pictureBox;
 			this.Controls.Add(pictureBox);
 			pictureBox.MouseDown += MyOnMouseDown;
+			pictureBox.Dock = DockStyle.None;
+			ReZoom(1.5);
+		}
+
+		internal void ReZoom(double NewZoom)
+		{
+			Zoom = NewZoom;
+			MyWebcam.Width = (int)(this.Width * Zoom);
+			MyWebcam.Height = (int)(this.Height * Zoom);
+			MyWebcam.Left = (int)((this.Width-MyWebcam.Width) * 0.5);
+			MyWebcam.Top = (int)((this.Height-MyWebcam.Height) * 0.5);
 		}
 
 

@@ -36,6 +36,10 @@ namespace ScreenShowElements
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.CtxMenu = new System.Windows.Forms.Button();
 			this.toggleShowInTaskbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.webcamZoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.zoomInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.zoomOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -52,6 +56,7 @@ namespace ScreenShowElements
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addBlankingToolStripMenuItem,
+            this.webcamZoomToolStripMenuItem,
             this.toggleShowInTaskbarToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
@@ -89,6 +94,37 @@ namespace ScreenShowElements
 			this.toggleShowInTaskbarToolStripMenuItem.Text = "Toggle show in taskbar";
 			this.toggleShowInTaskbarToolStripMenuItem.Click += new System.EventHandler(this.toggleShowInTaskbarToolStripMenuItem_Click);
 			// 
+			// webcamZoomToolStripMenuItem
+			// 
+			this.webcamZoomToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zoomInToolStripMenuItem,
+            this.zoomOutToolStripMenuItem,
+            this.resetToolStripMenuItem});
+			this.webcamZoomToolStripMenuItem.Name = "webcamZoomToolStripMenuItem";
+			this.webcamZoomToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+			this.webcamZoomToolStripMenuItem.Text = "Webcam zoom";
+			// 
+			// zoomInToolStripMenuItem
+			// 
+			this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
+			this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.zoomInToolStripMenuItem.Text = "Zoom in";
+			this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
+			// 
+			// zoomOutToolStripMenuItem
+			// 
+			this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
+			this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.zoomOutToolStripMenuItem.Text = "Zoom out";
+			this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
+			// 
+			// resetToolStripMenuItem
+			// 
+			this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+			this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.resetToolStripMenuItem.Text = "Reset";
+			this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+			// 
 			// MainWindowForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -114,6 +150,10 @@ namespace ScreenShowElements
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.Button CtxMenu;
 		private System.Windows.Forms.ToolStripMenuItem toggleShowInTaskbarToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem webcamZoomToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem zoomInToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem zoomOutToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
 	}
 }
 

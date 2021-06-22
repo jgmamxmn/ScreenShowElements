@@ -452,6 +452,24 @@ namespace ScreenShowElements
 			this.ShowInTaskbar = !this.ShowInTaskbar;
 		}
 
+		private void zoomInToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (Floaty is object)
+				Floaty.ReZoom(Floaty.Zoom + 0.25);
+		}
+
+		private void zoomOutToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (Floaty is object)
+				Floaty.ReZoom(Floaty.Zoom - 0.25);
+		}
+
+		private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (Floaty is object)
+				Floaty.ReZoom(1.0);
+		}
+
 		private IntPtr DoMyHookProc(int code, IntPtr wParam, IntPtr lParam)
 		{
 			if (code==HC_ACTION && KeyBtns is object)

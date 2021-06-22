@@ -24,14 +24,16 @@ namespace ScreenShowElements
 		{
 			InitializeComponent();
 
+			int MyWidth = 700, MyHeight = 180;
+
 			this.StartPosition = FormStartPosition.Manual;
-			this.Size = new Size(800, 200);
+			this.Size = new Size(MyWidth, MyHeight);
 			this.TopMost = true;
 
 			int MyPaddingX = 100;
 			int MyPaddingY = (int)(MyPaddingX * 0.5);
 			var Scrn = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
-			this.Location = new Point(MyPaddingX, Scrn.Height - 200 - MyPaddingY);
+			this.Location = new Point(MyPaddingX, Scrn.Height - MyHeight - MyPaddingY);
 
 			this.SizeChanged += MainWindowForm_SizeChanged;
 			this.FormClosing += Form1_FormClosing;
@@ -123,8 +125,8 @@ namespace ScreenShowElements
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			LoadWebcam();
 			LoadKeyboard();
+			LoadWebcam();
 		}
 
 		private void LoadWebcam()
@@ -200,7 +202,7 @@ namespace ScreenShowElements
 			}
 		}
 
-		Dictionary<int, string> KeyNames = new Dictionary<int, string>() { { 0, "No key pressed" }, { 1, "Mouse 1" }, { 2, "Mouse 2" }, { 3, "Cancel" }, { 4, "Mouse 3" }, { 5, "Mouse 4" }, { 6, "Mouse 5" }, { 8, "←" }, { 9, "↹" }, { 10, "Linefeed" }, { 12, "Clear" }, { 13, "Enter" }, { 16, "Shift" }, { 17, "Ctrl" }, { 18, "Alt" }, { 19, "Pause" }, { 20, "Caps lock" }, { 21, "IME Hangul mode" }, { 22, "IME Kana mode" }, { 23, "IME Junja mode" }, { 24, "IME final mode" }, { 25, "IME Hanja mode" }, { 26, "IME Kanji mode" }, { 27, "Esc" }, { 28, "IME convert" }, { 29, "IME nonconvert" }, { 30, "IME accept key" }, { 31, "IME mode change" }, { 32, "Space" }, { 33, "PgUp" }, { 34, "PgDn" }, { 35, "End" }, { 36, "Home" }, { 37, '←'.ToString() }, { 38, '↑'.ToString() }, { 39, '→'.ToString() }, { 40, '↓'.ToString() }, { 41, "Select" }, { 42, "Print" }, { 43, "Exec" }, { 44, "PrtScr" }, { 45, "Ins" }, { 46, "Del" }, { 47, "Help" }, { 48, "0" }, { 49, "1" }, { 50, "2" }, { 51, "3" }, { 52, "4" }, { 53, "5" }, { 54, "6" }, { 55, "7" }, { 56, "8" }, { 57, "9" }, { 65, "A" }, { 66, "B" }, { 67, "C" }, { 68, "D" }, { 69, "E" }, { 70, "F" }, { 71, "G" }, { 72, "H" }, { 73, "I" }, { 74, "J" }, { 75, "K" }, { 76, "L" }, { 77, "M" }, { 78, "N" }, { 79, "O" }, { 80, "P" }, { 81, "Q" }, { 82, "R" }, { 83, "S" }, { 84, "T" }, { 85, "U" }, { 86, "V" }, { 87, "W" }, { 88, "X" }, { 89, "Y" }, { 90, "Z" }, { 91, "Win" }, { 92, "Win" }, { 93, "Menu key" }, { 95, "Sleep" }, { 96, "`" }, { 97, "Num 1" }, { 98, "Num 2" }, { 99, "Num 3" }, { 100, "Num 4" }, { 101, "Num 5" }, { 102, "Num 6" }, { 103, "Num 7" }, { 104, "Num 8" }, { 105, "Num 9" }, { 106, "Num *" }, { 107, "Num +" }, { 108, "separator" }, { 109, "Num -" }, { 110, "Num ." }, { 111, "Num /" }, { 112, "F1" }, { 113, "F2" }, { 114, "F3" }, { 115, "F4" }, { 116, "F5" }, { 117, "F6" }, { 118, "F7" }, { 119, "F8" }, { 120, "F9" }, { 121, "F10" }, { 122, "F11" }, { 123, "F12" }, { 124, "F13" }, { 125, "F14" }, { 126, "F15" }, { 127, "F16" }, { 128, "F17" }, { 129, "F18" }, { 130, "F19" }, { 131, "F20" }, { 132, "F21" }, { 133, "F22" }, { 134, "F23" }, { 135, "F24" }, { 144, "Num lock" }, { 145, "Scroll lock" }, { 160, "Shift" }, { 161, "Shift" }, { 162, "Ctrl" }, { 163, "Ctrl" }, { 164, "Alt" }, { 165, "Alt" }, { 166, "Browser back" }, { 167, "Browser forward" }, { 168, "Browser refresh" }, { 169, "Browser stop" }, { 170, "Browser search" }, { 171, "Browser favorites" }, { 172, "Browser home" }, { 173, "Vol mute" }, { 174, "Vol-" }, { 175, "Vol+" }, { 176, '⏭'.ToString() }, { 177, '⏮'.ToString() }, { 178, '⏹'.ToString() }, { 179, '⏯'.ToString() }, { 180, "Mail" }, { 181, "Media" }, { 182, "App 1" }, { 183, "App 2" }, { 186, "OEM 1" }, { 187, "OEM +" }, { 188, "," }, { 189, "-" }, { 190, "." }, { 191, "/" }, { 192, "=" }, { 219, "[" }, { 220, "OEM 5" }, { 221, "]" }, { 222, "'" }, { 223, "OEM 8" }, { 226, "\\" }, { 229, "Process key" }, { 231, "Unicode character" }, { 246, "Attn" }, { 247, "CRSEL" }, { 248, "EXSEL" }, { 249, "ERASE EOF" }, { 250, "Play" }, { 251, "Zoom" }, { 252, "RSVD" }, { 253, "PA1" }, { 254, "Clear" }, { 65535, "KVAL" }, { 65536, "Shift mod" }, { 131072, "Ctrl mod" }, { 262144, "Alt mod" } }; // "LEFT"},
+		Dictionary<int, string> KeyNames = new Dictionary<int, string>() { { 0, "No key pressed" }, { 1, "Mouse 1" }, { 2, "Mouse 2" }, { 3, "Cancel" }, { 4, "Mouse 3" }, { 5, "Mouse 4" }, { 6, "Mouse 5" }, { 8, "←" }, { 9, "↹" }, { 10, "Linefeed" }, { 12, "Clear" }, { 13, "Enter" }, { 16, "Shift" }, { 17, "Ctrl" }, { 18, "Alt" }, { 19, "Pause" }, { 20, "Caps lock" }, { 21, "IME Hangul mode" }, { 22, "IME Kana mode" }, { 23, "IME Junja mode" }, { 24, "IME final mode" }, { 25, "IME Hanja mode" }, { 26, "IME Kanji mode" }, { 27, "Esc" }, { 28, "IME convert" }, { 29, "IME nonconvert" }, { 30, "IME accept key" }, { 31, "IME mode change" }, { 32, "Space" }, { 33, "PgUp" }, { 34, "PgDn" }, { 35, "End" }, { 36, "Home" }, { 37, '←'.ToString() }, { 38, '↑'.ToString() }, { 39, '→'.ToString() }, { 40, '↓'.ToString() }, { 41, "Select" }, { 42, "Print" }, { 43, "Exec" }, { 44, "PrtScr" }, { 45, "Ins" }, { 46, "Del" }, { 47, "Help" }, { 48, "0" }, { 49, "1" }, { 50, "2" }, { 51, "3" }, { 52, "4" }, { 53, "5" }, { 54, "6" }, { 55, "7" }, { 56, "8" }, { 57, "9" }, { 65, "A" }, { 66, "B" }, { 67, "C" }, { 68, "D" }, { 69, "E" }, { 70, "F" }, { 71, "G" }, { 72, "H" }, { 73, "I" }, { 74, "J" }, { 75, "K" }, { 76, "L" }, { 77, "M" }, { 78, "N" }, { 79, "O" }, { 80, "P" }, { 81, "Q" }, { 82, "R" }, { 83, "S" }, { 84, "T" }, { 85, "U" }, { 86, "V" }, { 87, "W" }, { 88, "X" }, { 89, "Y" }, { 90, "Z" }, { 91, "Win" }, { 92, "Win" }, { 93, "Menu key" }, { 95, "Sleep" }, { 96, "`" }, { 97, "Num 1" }, { 98, "Num 2" }, { 99, "Num 3" }, { 100, "Num 4" }, { 101, "Num 5" }, { 102, "Num 6" }, { 103, "Num 7" }, { 104, "Num 8" }, { 105, "Num 9" }, { 106, "Num *" }, { 107, "Num +" }, { 108, "separator" }, { 109, "Num -" }, { 110, "Num ." }, { 111, "Num /" }, { 112, "F1" }, { 113, "F2" }, { 114, "F3" }, { 115, "F4" }, { 116, "F5" }, { 117, "F6" }, { 118, "F7" }, { 119, "F8" }, { 120, "F9" }, { 121, "F10" }, { 122, "F11" }, { 123, "F12" }, { 124, "F13" }, { 125, "F14" }, { 126, "F15" }, { 127, "F16" }, { 128, "F17" }, { 129, "F18" }, { 130, "F19" }, { 131, "F20" }, { 132, "F21" }, { 133, "F22" }, { 134, "F23" }, { 135, "F24" }, { 144, "Num lock" }, { 145, "Scroll lock" }, { 160, "Shift" }, { 161, "Shift" }, { 162, "Ctrl" }, { 163, "Ctrl" }, { 164, "Alt" }, { 165, "Alt" }, { 166, "Browser back" }, { 167, "Browser forward" }, { 168, "Browser refresh" }, { 169, "Browser stop" }, { 170, "Browser search" }, { 171, "Browser favorites" }, { 172, "Browser home" }, { 173, "Vol mute" }, { 174, "Vol-" }, { 175, "Vol+" }, { 176, '⏭'.ToString() }, { 177, '⏮'.ToString() }, { 178, '⏹'.ToString() }, { 179, '⏯'.ToString() }, { 180, "Mail" }, { 181, "Media" }, { 182, "App 1" }, { 183, "App 2" }, { 186, "OEM 1" }, { 187, "OEM +" }, { 188, "," }, { 189, "-" }, { 190, "." }, { 191, "/" }, { 192, "~" }, { 219, "[" }, { 220, "OEM 5" }, { 221, "]" }, { 222, "'" }, { 223, "OEM 8" }, { 226, "\\" }, { 229, "Process key" }, { 231, "Unicode character" }, { 246, "Attn" }, { 247, "CRSEL" }, { 248, "EXSEL" }, { 249, "ERASE EOF" }, { 250, "Play" }, { 251, "Zoom" }, { 252, "RSVD" }, { 253, "PA1" }, { 254, "Clear" }, { 65535, "KVAL" }, { 65536, "Shift mod" }, { 131072, "Ctrl mod" }, { 262144, "Alt mod" } }; // "LEFT"},
 
 
 		class KeyBtn
@@ -220,10 +222,33 @@ namespace ScreenShowElements
 				Code = code;
 				WidthMultiplier = 1.0;
 			}
-			public void Resize(int KeyWidth, int KeyHeight)
+			public void Resize(MainWindowForm form, int KeyWidth, int KeyHeight)
 			{
 				Btn.Size = new Size((int)(KeyWidth * WidthMultiplier), KeyHeight);
 				Btn.Location = new Point((int)(KeyWidth * X), KeyHeight * Y);
+
+				var G = Btn.CreateGraphics();
+
+				//if (form.G is object)
+				{
+					var F = form.MyDefaultFont;
+					var TextWidth = G.MeasureString(Btn.Text, F).Width;
+					var FreeSpace = Btn.Width - TextWidth - 5F;
+					//Btn.Text = FreeSpace.ToString();
+					if (FreeSpace<=0F)
+					{
+						var NewSize = ((float)(F.Size * ((TextWidth + FreeSpace) / TextWidth))-2.5F);
+
+						//Btn.Text = NewSize.ToString();
+
+						F = new Font(F.FontFamily, NewSize);
+						Btn.Font = F;
+					}
+					else
+					{
+						Btn.Font = form.MyDefaultFont;
+					}
+				}
 			}
 		}
 
@@ -255,12 +280,13 @@ namespace ScreenShowElements
 			_KeyRows.Add(new Row().C('\t').C(PartExtendLastKey).S("QWERTYUIOP").K(Keys.OemOpenBrackets).K(Keys.OemCloseBrackets).K(Keys.OemBackslash).C(PartExtendLastKey).C(LittleBreak).K(Keys.Delete).K(Keys.End).K(Keys.PageDown).ToString());
 			_KeyRows.Add(new Row().K(Keys.CapsLock).C(ExtendLastKey).S("ASDFGHJKL;").K(Keys.OemQuotes).K(Keys.Enter).C(ExtendLastKey).C(LittleBreak).C(NoKey).C(NoKey).C(NoKey).ToString());
 			_KeyRows.Add(new Row().K(Keys.LShiftKey).C(ExtendLastKey).C(PartExtendLastKey).S("ZXCVBNM").K(Keys.Oemcomma).K(Keys.OemPeriod).K(Keys.OemQuestion).K(Keys.RShiftKey).C(ExtendLastKey).C(PartExtendLastKey).C(LittleBreak).C(NoKey).K(Keys.Up).C(NoKey).ToString());
-			_KeyRows.Add(new Row().K(Keys.LControlKey).C(ExtendLastKey).K(Keys.LWin).K(Keys.Menu).K(Keys.Space).K(Keys.RMenu).K(Keys.RWin).K(Keys.RControlKey).C(LittleBreak).K(Keys.Left).K(Keys.Down).K(Keys.Right).ToString());
+			_KeyRows.Add(new Row().K(Keys.LControlKey).C(ExtendLastKey).K(Keys.LWin).C((char)164).K(Keys.Space).K(Keys.RMenu).K(Keys.RWin).K(Keys.RControlKey).C(LittleBreak).K(Keys.Left).K(Keys.Down).K(Keys.Right).ToString());
 
 			return _KeyRows;
 		}
 
 		Color MyDefaultBtnColor;
+		Font MyDefaultFont;
 
 		private void LoadKeyboard()
 		{
@@ -304,6 +330,7 @@ namespace ScreenShowElements
 							Lbl = C.ToString();
 						Button Btn = new Button();
 						MyDefaultBtnColor = Btn.BackColor;
+						MyDefaultFont = Btn.Font;
 						Btn.TabStop = false;
 						Btn.Name = "Key_" + ((int)C).ToString();
 						Btn.Text = Lbl;
@@ -339,7 +366,7 @@ namespace ScreenShowElements
 					KeyWidth = aKeyWidth;
 			}
 			foreach (var aKB in KeyBtns)
-				aKB.Resize(KeyWidth, KeyHeight);
+				aKB.Resize(this, KeyWidth, KeyHeight);
 		}
 
 		const int WH_KEYBOARD = 2, WH_KEYBOARD_LL = 13;
@@ -393,6 +420,7 @@ namespace ScreenShowElements
 				MyHookProc = null;
 			}
 		}
+
 		private IntPtr DoMyHookProc(int code, IntPtr wParam, IntPtr lParam)
 		{
 			if (code==HC_ACTION && KeyBtns is object)
@@ -454,6 +482,7 @@ namespace ScreenShowElements
 				KBDLLHOOKSTRUCT kbd = (KBDLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(KBDLLHOOKSTRUCT));
 
 				//label1.Text = kbd.vkCode + "/" + kbd.scanCode;
+				//this.Text= kbd.vkCode + "/" + kbd.scanCode;
 
 				var Btn = KeyBtns.Where(M => M.Code == kbd.vkCode);
 

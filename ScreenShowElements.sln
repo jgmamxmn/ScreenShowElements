@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenShowElements", "ScreenShowElements\ScreenShowElements.csproj", "{CEFA1E25-5EEE-47EA-8654-F1DD0230EBD1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEFA1E25-5EEE-47EA-8654-F1DD0230EBD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEFA1E25-5EEE-47EA-8654-F1DD0230EBD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEFA1E25-5EEE-47EA-8654-F1DD0230EBD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEFA1E25-5EEE-47EA-8654-F1DD0230EBD1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {58407F4C-C050-49E4-B7A5-F7BCD9E8FF01}
+	EndGlobalSection
+EndGlobal

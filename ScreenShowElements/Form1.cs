@@ -351,6 +351,10 @@ namespace ScreenShowElements
 
 		private void ResizeKeys()
 		{
+			label1.Location = new Point(this.Width - label1.Width - 100, 8);
+			CtxMenu.Location = new Point(this.Width - CtxMenu.Width - 8, 8);
+
+
 			if (!(KeyBtns is object))
 				return;
 
@@ -419,6 +423,33 @@ namespace ScreenShowElements
 				hHook = IntPtr.Zero;
 				MyHookProc = null;
 			}
+		}
+
+		private void CtxMenu_Click(object sender, EventArgs e)
+		{
+			int X = 0, Y = CtxMenu.Height;
+			X += CtxMenu.Location.X;
+			Y += CtxMenu.Location.Y;
+			X += this.Location.X;
+			Y += this.Location.Y;
+
+			this.contextMenuStrip1.Show(new Point(X,Y));
+		}
+
+		private void addBlankingToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var blnk = new Blanking();
+			blnk.Show();
+		}
+
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
+
+		private void toggleShowInTaskbarToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			this.ShowInTaskbar = !this.ShowInTaskbar;
 		}
 
 		private IntPtr DoMyHookProc(int code, IntPtr wParam, IntPtr lParam)

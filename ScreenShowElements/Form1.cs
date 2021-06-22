@@ -30,8 +30,8 @@ namespace ScreenShowElements
 			this.Size = new Size(MyWidth, MyHeight);
 			this.TopMost = true;
 
-			int MyPaddingX = 100;
-			int MyPaddingY = (int)(MyPaddingX * 0.5);
+			int MyPaddingX = 50;
+			int MyPaddingY = (int)(MyPaddingX * 0.6);
 			var Scrn = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
 			this.Location = new Point(MyPaddingX, Scrn.Height - MyHeight - MyPaddingY);
 
@@ -126,7 +126,23 @@ namespace ScreenShowElements
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			LoadKeyboard();
-			LoadWebcam();
+			try
+			{
+				LoadWebcam();
+			}
+			catch
+			{
+				MessageBox.Show("An error occurred. Are you sure a webcam is connected?");
+				Close();
+				return;
+			}
+			LoadBlanking();
+		}
+
+		private void LoadBlanking()
+		{
+			var blnk = new Blanking();
+			blnk.Show();
 		}
 
 		private void LoadWebcam()
@@ -143,8 +159,8 @@ namespace ScreenShowElements
 
 			int FloatyWidth = 100;
 			int FloatyHeight = FloatyWidth; //(int)(((double)FloatyWidth) * 0.85);// 640x480, so height should be 3/4 of width, but that doesn't seem to look right
-			int FloatyPaddingX = FloatyHeight;
-			int FloatyPaddingY = (int)(FloatyPaddingX * 0.5);
+			int FloatyPaddingX = 100;
+			int FloatyPaddingY = 30;
 
 			var Scrn = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
 
@@ -438,8 +454,7 @@ namespace ScreenShowElements
 
 		private void addBlankingToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			var blnk = new Blanking();
-			blnk.Show();
+			LoadBlanking();
 		}
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)

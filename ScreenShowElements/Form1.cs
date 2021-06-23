@@ -136,12 +136,14 @@ namespace ScreenShowElements
 				Close();
 				return;
 			}
-			LoadBlanking();
+			LoadBlanking(1);
+			LoadBlanking(2);
 		}
 
-		private void LoadBlanking()
+		private void LoadBlanking(int configIdx)
 		{
 			var blnk = new Blanking();
+			blnk.Config(configIdx);
 			blnk.Show();
 		}
 
@@ -452,10 +454,6 @@ namespace ScreenShowElements
 			this.contextMenuStrip1.Show(new Point(X,Y));
 		}
 
-		private void addBlankingToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			LoadBlanking();
-		}
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -483,6 +481,21 @@ namespace ScreenShowElements
 		{
 			if (Floaty is object)
 				Floaty.ReZoom(1.0);
+		}
+
+		private void config1blanksAccountNameInWordToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			LoadBlanking(1);
+		}
+
+		private void config0dummyToFindIdealPositioningToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			LoadBlanking(0);
+		}
+
+		private void config2blanksSystemTrayAndClockToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			LoadBlanking(2);
 		}
 
 		private IntPtr DoMyHookProc(int code, IntPtr wParam, IntPtr lParam)

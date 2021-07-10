@@ -17,7 +17,7 @@ namespace ScreenShowElements
 {
 	public partial class MainWindowForm : Form
 	{
-		WebcamCaptureForm view;
+		WebcamCaptureForm WebcamViewForm;
 		WebcamCapturePresenter presenter;
 
 		public MainWindowForm()
@@ -41,24 +41,9 @@ namespace ScreenShowElements
 
 			this.label1.Text = "";
 
+			this.ToggleWebcam.Text = char.ConvertFromUtf32(127909).ToString(); // It's a camera symbol...
+
 			StartKeyboardHook();
-
-			try
-			{
-				/*var WC = new WebcamCapturer.Controls.WinForms.WebcamCaptureForm();
-				WC.Location = new System.Drawing.Point(10, 50);
-				WC.Size = new System.Drawing.Size(100, 100);
-				WC.TopLevel = false;
-				this.Controls.Add(WC);*/
-
-				view = new WebcamCaptureForm();
-				presenter = new WebcamCapturePresenter(view);
-				view.Show();
-			}
-			catch(Exception exc)
-			{
-				MessageBox.Show(exc.Message);
-			}
 		}
 
 		private void MainWindowForm_MouseDown(object sender, MouseEventArgs e)
@@ -66,8 +51,8 @@ namespace ScreenShowElements
 			switch (e.Button)
 			{
 				case MouseButtons.Left:
-					FloatyCamBox.ReleaseCapture();
-					FloatyCamBox.SendMessage(this.Handle, FloatyCamBox.WM_NCLBUTTONDOWN, FloatyCamBox.HT_CAPTION, IntPtr.Zero);
+					PInvoke.ReleaseCapture();
+					PInvoke.SendMessage(this.Handle, PInvoke.WM_NCLBUTTONDOWN, PInvoke.HT_CAPTION, IntPtr.Zero);
 					break;
 			}
 		}
@@ -77,28 +62,94 @@ namespace ScreenShowElements
 			ResizeKeys();
 		}
 
+		internal enum ThreeState { Hide, Show, Toggle }
+		internal ThreeState FloatyShow(ThreeState show)
+		{
+			if (show == ThreeState.Toggle)
+				show = (Floaty is object) ? ThreeState.Hide : ThreeState.Show;
+
+			if(show== ThreeState.Show)
+			{
+				try
+				{
+					WebcamViewForm = new WebcamCaptureForm();
+					presenter = new WebcamCapturePresenter(WebcamViewForm);
+					WebcamViewForm.Show();
+				}
+				catch (Exception exc)
+				{
+					MessageBox.Show(exc.Message);
+					return ThreeState.Hide;
+				}
+
+				Combo = (WebcamViewForm.Controls["splitContainer1"].Controls[0].Controls["comboBox1"] as ComboBox);
+				BtnConnect = (WebcamViewForm.Controls["splitContainer1"].Controls[0].Controls["BtnConnect"] as Button);
+				BtnDisconnect = (WebcamViewForm.Controls["splitContainer1"].Controls[0].Controls["BtnDisconnect"] as Button);
+				OutpContainer = WebcamViewForm.Controls["splitContainer1"].Controls[1].Controls["splitContainer2"].Controls[0];
+				Outp = (OutpContainer.Controls["PbCamImage"] as PictureBox);
+
+				Combo.SelectedIndex = -1;
+				Combo.SelectedIndex = 0;
+				BtnConnect.PerformClick();
+
+				int FloatyWidth = 100;
+				int FloatyHeight = FloatyWidth; //(int)(((double)FloatyWidth) * 0.85);// 640x480, so height should be 3/4 of width, but that doesn't seem to look right
+				int FloatyPaddingX = 100;
+				int FloatyPaddingY = 30;
+
+				var Scrn = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
+
+				Floaty = new FloatyCamBox();
+				Floaty.WindowState = FormWindowState.Normal;
+				Floaty.StartPosition = FormStartPosition.Manual;
+				Floaty.BringToFront();
+				Floaty.Size = new Size(FloatyWidth, FloatyHeight);
+				Floaty.Location = new Point(Scrn.Width - FloatyWidth - FloatyPaddingX, Scrn.Height - FloatyHeight - FloatyPaddingY);
+				Floaty.TopMost = true;
+				Floaty.ShowInTaskbar = false;
+				Floaty.Show();
+
+				Floaty.AttachWebcam(Outp);
+
+				WebcamViewForm.Visible = false;
+			}
+			else
+			{
+				if (Floaty is object)
+				{
+					// Give the webcam control back to the webcam view window.
+					if (Floaty.MyWebcam is object && OutpContainer is object)
+					{
+						OutpContainer.Controls.Add(Floaty.MyWebcam);
+						Floaty.MyWebcam = null;
+					}
+
+					Floaty.Close();
+					Floaty = null;
+				}
+				// Disconnect webcam
+				if (BtnDisconnect is object)
+					BtnDisconnect.PerformClick();
+				// Close webcam window
+				if (WebcamViewForm is object)
+				{
+					//WebcamViewForm.Close(); // < Causes crash, for some reason??
+					WebcamViewForm= null;
+				}
+			}
+
+			return show;
+		}
+
+
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			StopKeyboardHook();
 
-			if (view is object)
-				view.Visible = true;
+			if (WebcamViewForm is object)
+				WebcamViewForm.Visible = true;
 
-			if (Floaty is object)
-			{
-				// Give the webcam control back to the webcam view window.
-				if(Floaty.MyWebcam is object && OutpContainer is object)
-				{
-					OutpContainer.Controls.Add(Floaty.MyWebcam);
-					Floaty.MyWebcam = null;
-				}
-
-				Floaty.Close();
-			}
-
-			// Disconnect webcam
-			if (BtnDisconnect is object)
-				BtnDisconnect.PerformClick();
+			FloatyShow(ThreeState.Hide);
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -113,7 +164,7 @@ namespace ScreenShowElements
 			}
 
 			var xSB = new StringBuilder();
-			Iter(view, xSB, "");
+			Iter(WebcamViewForm, xSB, "");
 			MessageBox.Show(xSB.ToString());
 		}
 
@@ -126,16 +177,7 @@ namespace ScreenShowElements
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			LoadKeyboard();
-			try
-			{
-				LoadWebcam();
-			}
-			catch
-			{
-				MessageBox.Show("An error occurred. Are you sure a webcam is connected?");
-				Close();
-				return;
-			}
+			//LoadWebcam();
 			LoadBlanking(1);
 			LoadBlanking(2);
 		}
@@ -149,36 +191,15 @@ namespace ScreenShowElements
 
 		private void LoadWebcam()
 		{
-			Combo = (view.Controls["splitContainer1"].Controls[0].Controls["comboBox1"] as ComboBox);
-			BtnConnect = (view.Controls["splitContainer1"].Controls[0].Controls["BtnConnect"] as Button);
-			BtnDisconnect = (view.Controls["splitContainer1"].Controls[0].Controls["BtnDisconnect"] as Button);
-			OutpContainer = view.Controls["splitContainer1"].Controls[1].Controls["splitContainer2"].Controls[0];
-			Outp = (OutpContainer.Controls["PbCamImage"] as PictureBox);
-
-			Combo.SelectedIndex = -1;
-			Combo.SelectedIndex = 0;
-			BtnConnect.PerformClick();
-
-			int FloatyWidth = 100;
-			int FloatyHeight = FloatyWidth; //(int)(((double)FloatyWidth) * 0.85);// 640x480, so height should be 3/4 of width, but that doesn't seem to look right
-			int FloatyPaddingX = 100;
-			int FloatyPaddingY = 30;
-
-			var Scrn = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
-
-			Floaty = new FloatyCamBox();
-			Floaty.WindowState = FormWindowState.Normal;
-			Floaty.StartPosition = FormStartPosition.Manual;
-			Floaty.BringToFront();
-			Floaty.Size = new Size(FloatyWidth, FloatyHeight);
-			Floaty.Location = new Point(Scrn.Width - FloatyWidth - FloatyPaddingX, Scrn.Height - FloatyHeight - FloatyPaddingY);
-			Floaty.TopMost = true;
-			Floaty.ShowInTaskbar = false;
-			Floaty.Show();
-
-			Floaty.AttachWebcam(Outp);
-
-			view.Visible = false;
+			try
+			{
+				FloatyShow(ThreeState.Show);
+			}
+			catch
+			{
+				MessageBox.Show("An error occurred accessing the webcam. Are you sure a webcam is connected?");
+				FloatyShow(ThreeState.Hide);
+			}			
 		}
 
 
@@ -371,7 +392,7 @@ namespace ScreenShowElements
 		{
 			label1.Location = new Point(this.Width - label1.Width - 100, 8);
 			CtxMenu.Location = new Point(this.Width - CtxMenu.Width - 8, 8);
-
+			ToggleWebcam.Location = new Point(this.Width - CtxMenu.Width - 8 - ToggleWebcam.Width - 2, 8);
 
 			if (!(KeyBtns is object))
 				return;
@@ -496,6 +517,17 @@ namespace ScreenShowElements
 		private void config2blanksSystemTrayAndClockToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			LoadBlanking(2);
+		}
+
+		private void ToggleWebcam_Click(object sender, EventArgs e)
+		{
+			var NewState = FloatyShow(ThreeState.Toggle);
+			// Could use NewState to change the appearance of the button (e.g. make it look 'pressed').				
+		}
+
+		private void toggleWebcamToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			FloatyShow(ThreeState.Toggle);
 		}
 
 		private IntPtr DoMyHookProc(int code, IntPtr wParam, IntPtr lParam)

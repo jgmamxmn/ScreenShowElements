@@ -86,8 +86,8 @@ namespace ScreenShowElements
 			switch (e.Button)
 			{
 				case MouseButtons.Left:
-					FloatyCamBox.ReleaseCapture();
-					FloatyCamBox.SendMessage(this.Handle, FloatyCamBox.WM_NCLBUTTONDOWN, FloatyCamBox.HT_CAPTION, IntPtr.Zero);
+					PInvoke.ReleaseCapture();
+					PInvoke.SendMessage(this.Handle, PInvoke.WM_NCLBUTTONDOWN, PInvoke.HT_CAPTION, IntPtr.Zero);
 					break;
 			}
 		}

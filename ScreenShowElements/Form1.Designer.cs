@@ -32,6 +32,10 @@ namespace ScreenShowElements
 			this.components = new System.ComponentModel.Container();
 			this.label1 = new System.Windows.Forms.Label();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.addBlankingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.config0dummyToFindIdealPositioningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.config1blanksAccountNameInWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.config2blanksSystemTrayAndClockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.webcamZoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.zoomInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.zoomOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,10 +43,8 @@ namespace ScreenShowElements
 			this.toggleShowInTaskbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.CtxMenu = new System.Windows.Forms.Button();
-			this.addBlankingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.config1blanksAccountNameInWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.config2blanksSystemTrayAndClockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.config0dummyToFindIdealPositioningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ToggleWebcam = new System.Windows.Forms.Button();
+			this.toggleWebcamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -59,11 +61,43 @@ namespace ScreenShowElements
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addBlankingToolStripMenuItem1,
+            this.toggleWebcamToolStripMenuItem,
             this.webcamZoomToolStripMenuItem,
             this.toggleShowInTaskbarToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
 			this.contextMenuStrip1.Size = new System.Drawing.Size(195, 114);
+			// 
+			// addBlankingToolStripMenuItem1
+			// 
+			this.addBlankingToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.config0dummyToFindIdealPositioningToolStripMenuItem,
+            this.config1blanksAccountNameInWordToolStripMenuItem,
+            this.config2blanksSystemTrayAndClockToolStripMenuItem});
+			this.addBlankingToolStripMenuItem1.Name = "addBlankingToolStripMenuItem1";
+			this.addBlankingToolStripMenuItem1.Size = new System.Drawing.Size(194, 22);
+			this.addBlankingToolStripMenuItem1.Text = "Add blanking...";
+			// 
+			// config0dummyToFindIdealPositioningToolStripMenuItem
+			// 
+			this.config0dummyToFindIdealPositioningToolStripMenuItem.Name = "config0dummyToFindIdealPositioningToolStripMenuItem";
+			this.config0dummyToFindIdealPositioningToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+			this.config0dummyToFindIdealPositioningToolStripMenuItem.Text = "Config 0 (dummy to find ideal positioning)";
+			this.config0dummyToFindIdealPositioningToolStripMenuItem.Click += new System.EventHandler(this.config0dummyToFindIdealPositioningToolStripMenuItem_Click);
+			// 
+			// config1blanksAccountNameInWordToolStripMenuItem
+			// 
+			this.config1blanksAccountNameInWordToolStripMenuItem.Name = "config1blanksAccountNameInWordToolStripMenuItem";
+			this.config1blanksAccountNameInWordToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+			this.config1blanksAccountNameInWordToolStripMenuItem.Text = "Config 1 (blanks account name in Word)";
+			this.config1blanksAccountNameInWordToolStripMenuItem.Click += new System.EventHandler(this.config1blanksAccountNameInWordToolStripMenuItem_Click);
+			// 
+			// config2blanksSystemTrayAndClockToolStripMenuItem
+			// 
+			this.config2blanksSystemTrayAndClockToolStripMenuItem.Name = "config2blanksSystemTrayAndClockToolStripMenuItem";
+			this.config2blanksSystemTrayAndClockToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+			this.config2blanksSystemTrayAndClockToolStripMenuItem.Text = "Config 2 (blanks system tray and clock)";
+			this.config2blanksSystemTrayAndClockToolStripMenuItem.Click += new System.EventHandler(this.config2blanksSystemTrayAndClockToolStripMenuItem_Click);
 			// 
 			// webcamZoomToolStripMenuItem
 			// 
@@ -121,42 +155,30 @@ namespace ScreenShowElements
 			this.CtxMenu.UseVisualStyleBackColor = true;
 			this.CtxMenu.Click += new System.EventHandler(this.CtxMenu_Click);
 			// 
-			// addBlankingToolStripMenuItem1
+			// ToggleWebcam
 			// 
-			this.addBlankingToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.config0dummyToFindIdealPositioningToolStripMenuItem,
-            this.config1blanksAccountNameInWordToolStripMenuItem,
-            this.config2blanksSystemTrayAndClockToolStripMenuItem});
-			this.addBlankingToolStripMenuItem1.Name = "addBlankingToolStripMenuItem1";
-			this.addBlankingToolStripMenuItem1.Size = new System.Drawing.Size(194, 22);
-			this.addBlankingToolStripMenuItem1.Text = "Add blanking...";
+			this.ToggleWebcam.Font = new System.Drawing.Font("Microsoft Sans Serif", 4F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ToggleWebcam.Location = new System.Drawing.Point(752, 6);
+			this.ToggleWebcam.Name = "ToggleWebcam";
+			this.ToggleWebcam.Size = new System.Drawing.Size(18, 16);
+			this.ToggleWebcam.TabIndex = 3;
+			this.ToggleWebcam.Text = "C";
+			this.ToggleWebcam.UseVisualStyleBackColor = true;
+			this.ToggleWebcam.Click += new System.EventHandler(this.ToggleWebcam_Click);
 			// 
-			// config1blanksAccountNameInWordToolStripMenuItem
+			// toggleWebcamToolStripMenuItem
 			// 
-			this.config1blanksAccountNameInWordToolStripMenuItem.Name = "config1blanksAccountNameInWordToolStripMenuItem";
-			this.config1blanksAccountNameInWordToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
-			this.config1blanksAccountNameInWordToolStripMenuItem.Text = "Config 1 (blanks account name in Word)";
-			this.config1blanksAccountNameInWordToolStripMenuItem.Click += new System.EventHandler(this.config1blanksAccountNameInWordToolStripMenuItem_Click);
-			// 
-			// config2blanksSystemTrayAndClockToolStripMenuItem
-			// 
-			this.config2blanksSystemTrayAndClockToolStripMenuItem.Name = "config2blanksSystemTrayAndClockToolStripMenuItem";
-			this.config2blanksSystemTrayAndClockToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
-			this.config2blanksSystemTrayAndClockToolStripMenuItem.Text = "Config 2 (blanks system tray and clock)";
-			this.config2blanksSystemTrayAndClockToolStripMenuItem.Click += new System.EventHandler(this.config2blanksSystemTrayAndClockToolStripMenuItem_Click);
-			// 
-			// config0dummyToFindIdealPositioningToolStripMenuItem
-			// 
-			this.config0dummyToFindIdealPositioningToolStripMenuItem.Name = "config0dummyToFindIdealPositioningToolStripMenuItem";
-			this.config0dummyToFindIdealPositioningToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
-			this.config0dummyToFindIdealPositioningToolStripMenuItem.Text = "Config 0 (dummy to find ideal positioning)";
-			this.config0dummyToFindIdealPositioningToolStripMenuItem.Click += new System.EventHandler(this.config0dummyToFindIdealPositioningToolStripMenuItem_Click);
+			this.toggleWebcamToolStripMenuItem.Name = "toggleWebcamToolStripMenuItem";
+			this.toggleWebcamToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+			this.toggleWebcamToolStripMenuItem.Text = "Toggle webcam";
+			this.toggleWebcamToolStripMenuItem.Click += new System.EventHandler(this.toggleWebcamToolStripMenuItem_Click);
 			// 
 			// MainWindowForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.ToggleWebcam);
 			this.Controls.Add(this.CtxMenu);
 			this.Controls.Add(this.label1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -184,6 +206,8 @@ namespace ScreenShowElements
 		private System.Windows.Forms.ToolStripMenuItem config1blanksAccountNameInWordToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem config2blanksSystemTrayAndClockToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem config0dummyToFindIdealPositioningToolStripMenuItem;
+		private System.Windows.Forms.Button ToggleWebcam;
+		private System.Windows.Forms.ToolStripMenuItem toggleWebcamToolStripMenuItem;
 	}
 }
 
